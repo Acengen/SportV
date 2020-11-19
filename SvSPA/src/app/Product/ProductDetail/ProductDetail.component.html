@@ -1,0 +1,58 @@
+<div class="porddetail">
+  <carousel class="col-md-5" [isAnimated]="true">
+    <slide *ngFor="let img of images">
+      <img src="{{img}}" alt="first slide" >
+    </slide>
+  </carousel>
+  <div class="productdetail col-md-6" style="margin-left: 50px;" *ngIf="product">
+      <h2 style="font-weight: lighter;" >{{product.name}} {{product.description}}</h2>
+    <div class="priceofproduct">
+      <span style="font-weight: bold;font-size: 12px;">Online cena</span>
+      <h3>{{product.price}} RSD</h3>
+      <span class="text-muted">Usteda: 1.718 RSD</span>
+    </div>
+    <div class="sizesofproduct">
+      <div class="textofsizes">
+        <span><a href="">Velicine EU</a>/ <a>Velicine</a>/ Velicine CM</span>
+        <div class="sizes">
+          <span  *ngFor="let size of sizes" [ngClass]="SetClasses(size)" (click)="clickTOAdd(size)" >
+            {{size.sizes}}
+          </span>
+        </div>
+        <span *ngIf="sizeAdd !== ''">Ponisti <i (click)="removeSizeSelected()" class="fa fa-remove"></i> {{sizeAdd}}</span>
+      </div>
+    </div>
+    <div class="addtocart">
+      <button (click)="AddToCart()" type="submit" class="btn btn-primary">DODAJ U KORPU</button>
+    </div>
+  </div>
+</div>
+<div class="otheraboutporduct">
+  <table class="table" *ngIf="product">
+    <thead>
+      <tr>
+        <th scope="col">Karakteristike</th>
+        <th scope="col">Vrednosti</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Pol</th>
+        <td>{{product.age}}</td> 
+      </tr>
+      <tr>
+        <th scope="row">Brend</th>
+        <td>{{product.brand}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Uzrast</th>
+        <td>{{product.gender}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Namena</th>
+        <td>{{product.usage}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

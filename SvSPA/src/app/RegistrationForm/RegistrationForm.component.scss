@@ -1,0 +1,25 @@
+.regform, .loginform {
+    margin-top: 20px;
+    form {
+        max-width: 400px;
+        margin: auto;
+        input,button {
+            margin-top: 5px;
+        }
+        
+    }
+
+    span {
+        margin-left: 10px;
+        a {
+            color: blue;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+

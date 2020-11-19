@@ -1,0 +1,58 @@
+.porddetail {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+carousel {
+    img {
+        width: 100%;
+    }
+}
+.productdetail {
+    justify-self: left;
+}
+.priceofproduct {
+    margin-top: 40px;
+}
+:host ::ng-deep .carousel-indicators { 
+    li {
+        background-color: rgb(8, 114, 185);
+    }
+}
+:host ::ng-deep .right:hover {
+    background-color: rgb(224, 224, 224);
+}
+:host ::ng-deep .left:hover {
+    background-color:  rgb(224, 224, 224);
+}
+.sizesofproduct {
+    margin-top: 25px;
+    .textofsizes {
+        font-size: 15px;
+    }
+
+    .sizes {
+        margin-top: 10px;
+        span {
+            border: 1px solid grey;
+            padding: 5px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    }
+}
+
+
+.addtocart {
+    margin-top: 10px;
+}
+
+.is-complete {
+    background-color: gray;
+}
+
+.table {
+    max-width: 900px;
+    margin: 30px auto;
+    border-top: none !important;
+}
