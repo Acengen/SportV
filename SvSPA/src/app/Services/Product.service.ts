@@ -4,6 +4,7 @@ import {JwtHelperService} from '@auth0/angular-jwt'
 import { Product } from '../Interfaces/Product';
 import { User } from '../Interfaces/User';
 import {map} from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class ProductService {
   jwtHelper = new JwtHelperService();
   decodedToken:any;
   currentUser:User;
+  currentUserEmitter = new Subject();
 
 constructor(private http: HttpClient) { }
 
@@ -35,6 +37,7 @@ Login(value:any) {
       localStorage.setItem("token", resdata.token);
       localStorage.setItem("user", JSON.stringify(resdata.user));
       this.currentUser = resdata.user;
+      this.currentUserEmitter.next(this.currentUser);
       this.decodedToken = this.jwtHelper.decodeToken(resdata.token);
     }));
 }

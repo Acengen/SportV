@@ -12,7 +12,7 @@
         <a class="nav-link" [routerLink]="['products/register']" >Registruj se / Prijavi se</a>
       </li>
     </ul>
-    <div *ngIf="loggedIn()" class="btn-group" dropdown>
+    <div *ngIf="loggedIn()" class="btn-group dropdownlogged" dropdown>
       <button id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle"
               aria-controls="dropdown-basic">
         Welcome, {{currentUser.username}} <span class="caret"></span>

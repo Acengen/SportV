@@ -22,10 +22,14 @@ namespace SvAPI.Mapper
 
             CreateMap<UserForRegistarDto,User>();
             
+            
             CreateMap<UserDetailDto,User>();
 
-             CreateMap<User,UserDetailDto>();
+            CreateMap<User,UserDetailDto>();
 
+            CreateMap<UserToUpdateDto,User>();
+
+           
         }   
     }
 }

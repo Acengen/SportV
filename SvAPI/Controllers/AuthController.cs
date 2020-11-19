@@ -48,7 +48,7 @@ namespace SvAPI.Controllers
 
             var userReturn = _mapper.Map<UserDetailDto>(createUser);
 
-            return StatusCode(201, userReturn);
+            return StatusCode(201,userReturn);
         }
 
         [HttpPost("login")]

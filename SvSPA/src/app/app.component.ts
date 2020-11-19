@@ -11,7 +11,7 @@ import { User } from './Interfaces/User';
 export class AppComponent implements OnInit {
  
   jwtHelper = new JwtHelperService();
-  
+  token:any;
   constructor(private service:ProductService) {}
 
   ngOnInit() {
