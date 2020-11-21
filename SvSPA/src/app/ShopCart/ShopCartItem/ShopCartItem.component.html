@@ -1,0 +1,23 @@
+<div class="card mb-3" style="border-top: 0px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <h2>{{prodAndUser.productName}}</h2>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{prodAndUser.productDescription}}</h5>
+        <p style="font-weight: bold;">{{prodAndUser.productPrice}} RSD</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="card-bottom text-muted col-md-2">
+      <p style="margin-bottom: 0px;">Gender: {{prodAndUser.productGender}}</p>
+      <p>{{prodAndUser.username}}</p>
+    </div>
+    <div class="card-bottom text-muted col-md-8 text-right">
+      <p style="font-size: 13px;cursor: pointer;">Remove item</p>
+    </div>
+  </div>
+</div>

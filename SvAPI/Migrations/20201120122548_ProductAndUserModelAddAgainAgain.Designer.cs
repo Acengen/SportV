@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SvAPI.Data;
 
 namespace SvAPI.Migrations
 {
     [DbContext(typeof(SvDbContext))]
-    partial class SvDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201120122548_ProductAndUserModelAddAgainAgain")]
+    partial class ProductAndUserModelAddAgainAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +74,6 @@ namespace SvAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserEmail")

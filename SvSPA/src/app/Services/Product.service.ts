@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt'
 import { Product } from '../Interfaces/Product';
 import { User } from '../Interfaces/User';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ProductAndUser } from '../Interfaces/ProductAndUser';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class ProductService {
   jwtHelper = new JwtHelperService();
   decodedToken:any;
   currentUser:User;
+  productAndUser:ProductAndUser[];
+  counter:number;
+  counterSub = new Subject();
   currentUserEmitter = new Subject();
 
 constructor(private http: HttpClient) { }
@@ -47,4 +51,21 @@ loggedIn() {
   return !this.jwtHelper.isTokenExpired(token)
 }
 
+
+GetUser(id:number){
+  return this.http.get('http://localhost:5000/api/user/' + id);
+}
+
+EditUser(id:number,user:User){
+  return this.http.put("http://localhost:5000/api/user/" + id + "/edit", user);
+}
+
+AddToShopCart(productId:number, userId:number) {
+  return this.http.post<ProductAndUser>("http://localhost:5000/api/user/product/" + productId + "/user/" + userId, {});
+}
+
+GetProductsByUser(uId:number) {
+  return this.http.get<ProductAndUser[]>("http://localhost:5000/api/user/product/" + uId);
+} 
+  
 }

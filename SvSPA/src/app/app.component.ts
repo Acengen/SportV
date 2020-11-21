@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
  
   jwtHelper = new JwtHelperService();
   token:any;
+ 
   constructor(private service:ProductService) {}
 
   ngOnInit() {
@@ -25,5 +26,6 @@ export class AppComponent implements OnInit {
     if(user) {
       this.service.currentUser = user;
     }
+
   }
 }

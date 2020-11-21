@@ -14,5 +14,7 @@ namespace SvAPI.Data
        public DbSet<Size> Sizes {get;set;}
        public DbSet<ProductImage> ProductImages {get;set;}
        public DbSet<User> Users {get;set;}
+
+       public DbSet<ProductAndUser> ProductAndUsers {get;set;}
     }
 }

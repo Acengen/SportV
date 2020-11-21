@@ -1,0 +1,15 @@
+
+.profile {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(50%,1fr));
+    background-color: rgb(231, 231, 231);
+}
+
+.user {
+    padding: 20px; 
+}
+
+.user-edit {
+    justify-self:left;
+    padding: 20px;
+}

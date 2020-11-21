@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SvAPI.Data;
 using SvAPI.DataTransferObj;
+using SvAPI.Models;
 
 namespace SvAPI.Controllers
 {
@@ -48,5 +50,36 @@ namespace SvAPI.Controllers
 
            return NoContent();
         }
+
+        [HttpPost("product/{id}/user/{userId}")]
+        public async Task<IActionResult> AddToShopCart(int id, int userId){
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            var userToRetun = new ProductAndUser{
+                UId = user.Id,
+                Username = user.Username,
+                UserEmail = user.Email,
+                ProductName = product.Name,
+                ProductPrice = product.Price,
+                ProductDescription = product.Description,
+                ProductGender = product.Gender
+            };
+
+            _context.ProductAndUsers.Add(userToRetun);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(userToRetun);
+        }
+
+          [HttpGet("product/{uId}")]
+          public async Task<IActionResult> GetProductsByUser(int uId) {
+              var productOfUser = await _context.ProductAndUsers.Where(p => p.UId == uId).ToListAsync();
+
+              return Ok(productOfUser);
+          }
     }
+
+  
 }

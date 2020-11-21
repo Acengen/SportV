@@ -17,5 +17,6 @@ namespace SvAPI.Models
         public ICollection<Size> Sizes { get; set; }
 
         public ICollection<ProductImage> ProductImages { get; set; }
+
     }
 }

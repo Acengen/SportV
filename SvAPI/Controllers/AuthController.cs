@@ -11,6 +11,7 @@ using SvAPI.Models;
 using SvAPI.Repos;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace SvAPI.Controllers
 {
@@ -80,11 +81,13 @@ namespace SvAPI.Controllers
              var token = tokenHandler.CreateToken(tokenDescriptor);
 
              var user = _mapper.Map<UserDetailDto>(userFromRepo);
+             var prodAndUser = _context.ProductAndUsers.Where(p => p.UId == user.Id);
 
              return Ok( new 
              {
                  token = tokenHandler.WriteToken(token),
-                 user
+                 user,
+                 prodAndUser
              });
         }
     }

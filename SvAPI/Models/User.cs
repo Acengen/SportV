@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SvAPI.Models
 {
     public class User
@@ -10,5 +12,7 @@ namespace SvAPI.Models
         public string About { get; set; }
         public string NickName { get; set; }
         public string Email { get; set; }
+
+       
     }
 }

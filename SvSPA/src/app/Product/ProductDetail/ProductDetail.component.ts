@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'src/app/Interfaces/Product';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { User } from 'src/app/Interfaces/User';
 
 @Component({
   selector: 'app-ProductDetail',
@@ -12,6 +13,7 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 export class ProductDetailComponent implements OnInit {
 
   product:Product;
+  user:User;
   id:number;
   images = [];
   sizes = [];
@@ -21,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route:ActivatedRoute,private service:ProductService) { }
 
   ngOnInit() {
+    this.user = this.service.currentUser;
     this.route.params.subscribe(
       (param:Params) => {
         this.id = +param['id'];
@@ -57,14 +60,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   AddToCart() {
-    const pordToPost = {
-      name: this.product.name,
-      size: this.sizeAdd,
-      price:this.product.price,
-      description: this.product.description
-    }
-
-    console.log(pordToPost)
+    this.service.AddToShopCart(this.id,this.user.id).subscribe(resdata => console.log(resdata));
   }
 
   removeSizeSelected() {

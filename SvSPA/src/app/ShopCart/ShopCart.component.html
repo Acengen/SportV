@@ -1,0 +1,6 @@
+<h5 class="text-center text-muted my-3">TVOJA KORPA</h5>
+<div class="cart">
+  <div style="margin-top: 30px;" *ngFor="let prod of prodAndUser">
+    <app-ShopCartItem [prodAndUser]="prod"></app-ShopCartItem>
+  </div>
+</div>
