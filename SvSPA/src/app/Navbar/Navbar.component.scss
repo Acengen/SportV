@@ -1,5 +1,6 @@
 .fa {
-    font-size: 30px;color: white;
+    font-size: 30px;
+    color: white;
     position: relative;
 
     span {
@@ -14,3 +15,13 @@
     margin-right: 10px;
 }
 
+.logout {
+    cursor: pointer;
+}
+
+
+.mainimg {
+    width: 200px;
+    display: block;
+    margin: auto;
+}

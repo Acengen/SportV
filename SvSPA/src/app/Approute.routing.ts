@@ -1,3 +1,5 @@
+import { RegisterGuardGuard } from './register-guard.guard';
+import { CartGuard } from './cart.guard';
 import { UserComponent } from './User/User.component';
 import { RegistrationFormComponent } from './RegistrationForm/RegistrationForm.component';
 import { ProductDetailComponent } from './Product/ProductDetail/ProductDetail.component';
@@ -8,11 +10,11 @@ import { ShopCartComponent } from './ShopCart/ShopCart.component';
 export const routes: Routes = [
   { path:"", redirectTo:"/products", pathMatch:"full" },
   {path: "products", component:ProductComponent, children:[
-    {path: "register" , component: RegistrationFormComponent},
+    {path: "register" , component: RegistrationFormComponent, canActivate:[RegisterGuardGuard]},
   ]},
   {path: "products/:id", component:ProductDetailComponent},
   {path: "user/:id", component: UserComponent},
-  {path: "yourcart/:id", component: ShopCartComponent}
+  {path: "yourcart/:id", component: ShopCartComponent, canActivate:[CartGuard]}
 ];
 
 export const ApprouteRoutes = RouterModule.forChild(routes);

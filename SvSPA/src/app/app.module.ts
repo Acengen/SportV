@@ -1,3 +1,4 @@
+import { CartGuard } from './cart.guard';
 import { ShopCartItemComponent } from './ShopCart/ShopCartItem/ShopCartItem.component';
 import { routes } from './Approute.routing';
 import { ProductDetailComponent } from './Product/ProductDetail/ProductDetail.component';
@@ -50,7 +51,7 @@ export function tokenGetter() {
         }
     })
   ],
-  providers: [],
+  providers: [CartGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

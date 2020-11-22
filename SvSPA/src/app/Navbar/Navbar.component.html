@@ -1,17 +1,18 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <img src="https://logos-download.com/wp-content/uploads/2016/11/EA_Sports_logo_logotype.png" width="50px" >
+<nav class="navbar navbar-expand navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarsExample02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/products']" >Home</a>
+        <a class="nav-link" [routerLink]="['/products']" ><i class="fa fa-home" style="font-size:24px;color: black;"></i></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['products/register']" >Registruj se / Prijavi se</a>
+      <li class="nav-item" *ngIf="!currentUser">
+        <a class="nav-link" [routerLink]="['products/register']" >Registruj se | Prijavi se</a>
       </li>
+      
     </ul>
+    
     <div *ngIf="loggedIn()" class="btn-group dropdownlogged" dropdown>
       <button id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle"
               aria-controls="dropdown-basic">
@@ -19,10 +20,10 @@
       </button>
       <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
           role="menu" aria-labelledby="button-basic">
-        <li role="menuitem"><a class="dropdown-item" (click)="Logout()">Logout</a></li>
-        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/user', currentUser.id]" [queryParams]="{name: currentUser.username}">Edit Profile</a></li>
+        <li role="menuitem logout"><a class="dropdown-item" [routerLink]="['/']" (click)="Logout()">Logout</a></li>
+        <li role="menuitem editprofile"><a class="dropdown-item" [routerLink]="['/user', currentUser.id]" [queryParams]="{name: currentUser.username}">Edit Profile</a></li>
       </ul>
     </div>
-    <i  *ngIf="currentUser" class="fa fa-shopping-cart" [routerLink]="['/yourcart',currentUser.id]" routerLinkActive="router-link-active" ><span></span></i>
+    <i *ngIf="currentUser;else null" class="fa fa-shopping-cart" [routerLink]="['/yourcart',currentUser.id]" routerLinkActive="router-link-active" ></i>
   </div>
 </nav>

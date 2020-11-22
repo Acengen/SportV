@@ -12,11 +12,14 @@ export class AppComponent implements OnInit {
  
   jwtHelper = new JwtHelperService();
   token:any;
+  
  
   constructor(private service:ProductService) {}
 
   ngOnInit() {
+    
     const token = localStorage.getItem('token');
+    const counter = 0;
     const user:User = JSON.parse(localStorage.getItem('user'));
 
     if(token) {
@@ -26,6 +29,7 @@ export class AppComponent implements OnInit {
     if(user) {
       this.service.currentUser = user;
     }
-
+    
+   
   }
 }

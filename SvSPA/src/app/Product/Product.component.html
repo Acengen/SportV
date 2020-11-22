@@ -1,7 +1,40 @@
 <router-outlet></router-outlet>
-<h2 class="text-center py-3">Sport Cloud</h2>
+<p style="font-size: 15px;text-align: center;padding: 10px;"><span style="font-weight: bold;">BESPLATNA ISPORUKA</span><span class="text-muted"> za sve porudzbine iznad 6000 dinara <span style="text-decoration: underline;"> Pogledajte vise</span></span></p>
+<div class="carosDiv">
+  <carousel>
+    <slide>
+      <img src="https://hushformen.com/wp-content/uploads/2015/11/Compression-clothing.jpg" alt="first slide" style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Sportwear</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </slide>
+    <slide>
+      <img src="https://fashionchinaagency.com/wp-content/uploads/2016/06/cb47ed65fe0994d2af8ae6809a148a0b.jpg" alt="second slide" style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>CrossFit</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </slide>
+    <slide>
+      <img src="https://www.sneakerhdwallpapers.com/wallpapers/2019/sb-x-jordan-1-la-to-chicago-wallpaper-hd.jpg" alt="third slide" style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Just Do It</h3>
+        <p>New Nike SB shoes, only in a store.</p>
+      </div>
+    </slide>
+  </carousel>
+</div>
+<form #f="ngForm" class="p-3" (ngSubmit)="Submit(f)">
+  <select class="p-1" name="select" id="" ngModel>
+    <option value="">--- Order By ---</option>
+    <option value="2" (click)="OrderByPrice()">Order By Price</option>
+    <option value="3">Order By Name</option>
+  </select>
+  <button class="btn btn-dark m-3" type="submit">Next</button>
+</form>
 <div class="products">
-        <div *ngFor="let prod of product">
-            <app-ProductItem [product]="prod"></app-ProductItem>
-        </div>
+  <div *ngFor="let prod of product">
+    <app-ProductItem [product]="prod"></app-ProductItem>
+  </div>
 </div>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SvAPI.Data;
 
 namespace SvAPI.Migrations
 {
     [DbContext(typeof(SvDbContext))]
-    partial class SvDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201122113617_OrderTableAdd")]
+    partial class OrderTableAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

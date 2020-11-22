@@ -2,8 +2,8 @@ import { ProductService } from './../../Services/Product.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'src/app/Interfaces/Product';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { User } from 'src/app/Interfaces/User';
+
 
 @Component({
   selector: 'app-ProductDetail',
@@ -19,11 +19,14 @@ export class ProductDetailComponent implements OnInit {
   sizes = [];
   isclicked = false;
   sizeAdd = '';
- 
+  isAddedInCart:boolean;
+  currentUser:User;
+  messageIfUserDont:string;
   constructor(private route:ActivatedRoute,private service:ProductService) { }
 
   ngOnInit() {
     this.user = this.service.currentUser;
+    this.currentUser = this.service.currentUser;
     this.route.params.subscribe(
       (param:Params) => {
         this.id = +param['id'];
@@ -38,6 +41,7 @@ export class ProductDetailComponent implements OnInit {
         })
       }
     )
+   
   }
 
   clickTOAdd(size) {
@@ -60,7 +64,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   AddToCart() {
-    this.service.AddToShopCart(this.id,this.user.id).subscribe(resdata => console.log(resdata));
+    if(this.currentUser == null) {
+      this.messageIfUserDont = "Login/register";
+    }
+    this.service.AddToShopCart(this.id,this.user.id).subscribe(
+    (resdata:any) => {this.isAddedInCart = true; setTimeout(()=>{this.isAddedInCart=false},2000)},
+    error => console.log(error));
   }
 
   removeSizeSelected() {

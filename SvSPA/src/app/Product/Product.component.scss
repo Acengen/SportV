@@ -3,3 +3,15 @@
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
     justify-items: center;
 }
+
+.btn-order {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    margin: 10px;
+}
+
+.carosDiv {
+    padding-left: 50px;
+    padding-right: 50px;
+}

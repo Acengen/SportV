@@ -1,37 +1,43 @@
-<div class="loginform">
-  <form *ngIf="isRegistered" [formGroup]="loginForm" (ngSubmit)="Login()">
-    <h3 class="text-center">User login</h3>
-    <div class="from-group">
-      <input [ngClass]="{'is-invalid': loginForm.get('username').errors && loginForm.get('username').touched}" class="form-control" type="text" formControlName="username" placeholder="username">
-      <div class="invalid-feedback">Choose username</div>
+<div class="overlay">
+  <span [routerLink]="['/products']"  class="crossclose">X</span>
+  <div class="forms">
+    <div class="loginform">
+      <form *ngIf="isRegistered" [formGroup]="loginForm" (ngSubmit)="Login()">
+        <h3 class="text-center text-light">User login</h3>
+        <div class="from-group">
+          <input [ngClass]="{'is-invalid': loginForm.get('username').errors && loginForm.get('username').touched}" class="form-control" type="text" formControlName="username" placeholder="username">
+          <div class="invalid-feedback">Choose username</div>
+        </div>
+        <div class="from-group">
+          <input [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}" class="form-control" type="password" formControlName="password" placeholder="password">
+          <div class="invalid-feedback" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">Choose password</div>
+          <div class="invalid-feedback" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">Must be at least 3 chars</div>
+        </div>
+        <button class="btn btn-success" [disabled]="!loginForm.valid" type="submit">Login</button><span class="text-light">Dont have account <a (click)="isRegistered = !isRegistered">Register</a></span>
+      </form>
     </div>
-    <div class="from-group">
-      <input [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}" class="form-control" type="password" formControlName="password" placeholder="password">
-      <div class="invalid-feedback" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">Choose password</div>
-      <div class="invalid-feedback" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">Must be at least 3 chars</div>
+    
+    
+    <div class="regform">
+      <form *ngIf="!isRegistered" [formGroup]="regForm" (ngSubmit)="Register()">
+        <h3 class="text-center text-light">User registration</h3>
+        <div class="from-group">
+          <input [ngClass]="{'is-invalid': regForm.get('username').errors && regForm.get('username').touched}" class="form-control" type="text" formControlName="username" placeholder="username">
+          <div class="invalid-feedback">Choose username</div>
+        </div>
+        <div class="from-group">
+          <input [ngClass]="{'is-invalid': regForm.get('password').errors && regForm.get('password').touched}" class="form-control" type="password" formControlName="password" placeholder="password">
+          <div class="invalid-feedback" *ngIf="regForm.get('password').hasError('required') && regForm.get('password').touched">Choose password</div>
+          <div class="invalid-feedback" *ngIf="regForm.get('password').hasError('minlength') && regForm.get('password').touched">Must be at least 3 chars</div>
+        </div>
+        <div class="from-group">
+          <input [ngClass]="{'is-invalid': regForm.get('confirmPassword').errors && regForm.get('confirmPassword').touched || regForm.get('confirmPassword').touched && regForm.hasError('mismatch')}" class="form-control" type="password" formControlName="confirmPassword" placeholder="confirm password">
+          <div class="invalid-feedback" *ngIf="regForm.get('confirmPassword').hasError('required') && regForm.get('confirmPassword').touched">confirmPassword</div>
+          <div class="invalid-feedback" *ngIf="regForm.hasError('mismatch') && regForm.get('password').touched">Password must match</div>
+        </div>
+        <button class="btn btn-warning" [disabled]="!regForm.valid" type="submit">Register</button><span class="text-light">Already have account <a (click)="isRegistered = !isRegistered">Login</a></span>
+    </form>
     </div>
-    <button class="btn btn-success" [disabled]="!loginForm.valid" type="submit">Login</button><span>Dont have account <a (click)="isRegistered = !isRegistered">Register</a></span>
-  </form>
-</div>
-
-
-<div class="regform">
-  <form *ngIf="!isRegistered" [formGroup]="regForm" (ngSubmit)="Register()">
-    <h3 class="text-center">User registration</h3>
-    <div class="from-group">
-      <input [ngClass]="{'is-invalid': regForm.get('username').errors && regForm.get('username').touched}" class="form-control" type="text" formControlName="username" placeholder="username">
-      <div class="invalid-feedback">Choose username</div>
-    </div>
-    <div class="from-group">
-      <input [ngClass]="{'is-invalid': regForm.get('password').errors && regForm.get('password').touched}" class="form-control" type="password" formControlName="password" placeholder="password">
-      <div class="invalid-feedback" *ngIf="regForm.get('password').hasError('required') && regForm.get('password').touched">Choose password</div>
-      <div class="invalid-feedback" *ngIf="regForm.get('password').hasError('minlength') && regForm.get('password').touched">Must be at least 3 chars</div>
-    </div>
-    <div class="from-group">
-      <input [ngClass]="{'is-invalid': regForm.get('confirmPassword').errors && regForm.get('confirmPassword').touched || regForm.get('confirmPassword').touched && regForm.hasError('mismatch')}" class="form-control" type="password" formControlName="confirmPassword" placeholder="confirm password">
-      <div class="invalid-feedback" *ngIf="regForm.get('confirmPassword').hasError('required') && regForm.get('confirmPassword').touched">confirmPassword</div>
-      <div class="invalid-feedback" *ngIf="regForm.hasError('mismatch') && regForm.get('password').touched">Password must match</div>
-    </div>
-    <button class="btn btn-warning" [disabled]="!regForm.valid" type="submit">Register</button><span>Already have account <a (click)="isRegistered = !isRegistered">Login</a></span>
-</form>
+  </div>
+  
 </div>

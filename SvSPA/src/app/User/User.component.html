@@ -1,20 +1,13 @@
 <div class="profile" *ngIf="user">
-  <div class="user" >
-    <p class="text-muted">USER PROFILE</p>
-      <span>ACCOUNT NAME:</span>
-      <h3 style="text-transform: uppercase;"> {{user.username}}</h3>
+  <div class="user">
+      <p class="text-muted">USER PROFILE</p>
+      <h3 style="text-transform: capitalize;">{{user.username}}</h3>
+      <p style="text-transform: capitalize;" class="text-muted">{{user.nickName}}</p>
       <span *ngIf="user.about">ABOUT:</span>
       <p *ngIf="user.about">{{user.about}}</p>
-      <span *ngIf="user.email">EMAIL:</span>
-      <p *ngIf="user.email">{{user.email}}</p>
-      <span *ngIf="user.nickName">NICKNAME:</span>
-      <p *ngIf="user.nickName">{{user.nickName}}</p>
-      <span *ngIf="!user.about">ABOUT:</span>
-      <p *ngIf="!user.about">/</p>
-      <span *ngIf="!user.email">EMAIL:</span>
-      <p *ngIf="!user.email">/</p>
-      <span *ngIf="!user.nickName">NICKNAME:</span>
-      <p *ngIf="!user.nickName">/</p>
+      <div>
+        <p *ngIf="user.email">Email: {{user.email}}</p>
+      </div>
       <button (click)="edit=!edit" type="button" class="btn btn-danger">Edit</button>
   </div>
   <div class="user-edit" *ngIf="edit">

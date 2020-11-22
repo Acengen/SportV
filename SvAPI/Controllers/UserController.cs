@@ -65,7 +65,7 @@ namespace SvAPI.Controllers
                 ProductDescription = product.Description,
                 ProductGender = product.Gender
             };
-
+            
             _context.ProductAndUsers.Add(userToRetun);
 
             await _context.SaveChangesAsync();
@@ -76,8 +76,40 @@ namespace SvAPI.Controllers
           [HttpGet("product/{uId}")]
           public async Task<IActionResult> GetProductsByUser(int uId) {
               var productOfUser = await _context.ProductAndUsers.Where(p => p.UId == uId).ToListAsync();
-
               return Ok(productOfUser);
+          }
+
+          [HttpDelete("productAndUser/{id}")]
+          public async Task<IActionResult> RemoveProductFromUser(int id) {
+              var prodAndUser = await _context.ProductAndUsers.FirstOrDefaultAsync(p => p.Id == id);
+
+              _context.ProductAndUsers.Remove(prodAndUser);
+
+              await _context.SaveChangesAsync();
+
+              return NoContent();
+          }
+
+          [HttpDelete("removeAllProductFromUser/user/{id}")]
+          public async Task<IActionResult> RemoveAllProductsAfterBuyThem(int id){
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var prod = _context.ProductAndUsers.Where(p => p.UId == id);
+            
+            _context.ProductAndUsers.RemoveRange(prod);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+          }
+
+          [HttpGet("productBuy/{uId}")]
+          public async Task<IActionResult> BuyProduct(int uId){
+               var productOfUser = await _context.ProductAndUsers.Where(p => p.UId == uId).ToListAsync();
+               var sum = productOfUser.Sum(p => p.ProductPrice);
+               return Ok(new {
+                   productOfUser,
+                   sum
+               });
           }
     }
 

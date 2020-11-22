@@ -24,6 +24,8 @@
     </div>
     <div class="addtocart">
       <button (click)="AddToCart()" type="submit" class="btn btn-primary">DODAJ U KORPU</button>
+      <p *ngIf="isAddedInCart" class="ui-added">Added</p>
+      <p [routerLink]="['/products/register']" class="text-muted" style="cursor: pointer;">{{messageIfUserDont}}</p>
     </div>
   </div>
 </div>

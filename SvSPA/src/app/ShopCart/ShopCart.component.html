@@ -1,6 +1,54 @@
 <h5 class="text-center text-muted my-3">TVOJA KORPA</h5>
+<p *ngIf="prodAndUser.length <= 0" class="text-center text-muted">Tvoja korpa je prazna</p>
 <div class="cart">
-  <div style="margin-top: 30px;" *ngFor="let prod of prodAndUser">
-    <app-ShopCartItem [prodAndUser]="prod"></app-ShopCartItem>
+  <div style="margin-top: 30px;">
+    <app-ShopCartItem [prodAndUser]="prodAndUser"></app-ShopCartItem>
   </div>
+</div>
+<button *ngIf="prodAndUser.length > 0" (click)="GetBill()" class="btnBill m-3 text-light">Nastavi</button>
+
+<div *ngIf="order" class="bill">
+  <div class="orderyour">
+    <p style="font-size: 12px;" class="text-muted">YOUR ORDER</p>
+    <p  *ngFor="let o of order">{{o.productName}} ({{o.productDescription}})</p>
+    <p style="margin-bottom: 0px;"> {{oldPrice}} RSD</p>
+    <p *ngIf="discount" style="margin-bottom: 0px;">-{{discount}} RSD (-20% discount)</p>
+    <div *ngIf="discount" class="lineofdiscount"></div>
+    <p>= {{sum}} RSD</p>
+    <p>{{day}}</p>
+  </div>
+  <hr>
+  <p *ngIf="isBuy" class="bg-success p-3 text-light text-center">Success</p>
+  <form #f="ngForm" (ngSubmit)="Buy(f)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Ime i Prezime</label>
+        <input type="text" class="form-control" name="name" ngModel id="inputEmail4" placeholder="Ime i prezime" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Ulica i broj</label>
+        <input type="text" class="form-control" name="street" ngModel id="inputPassword4" placeholder="Ulica i broj" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" name="street2" ngModel id="inputAddress2" placeholder="Address 2">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">Grad</label>
+        <input type="text" class="form-control" name="city" ngModel required id="inputCity" placeholder="Grad">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">Opstina</label>
+        <input type="text" class="form-control" name="opstina" ngModel required id="inputState" placeholder="Opstina">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Postanski broj</label>
+        <input type="text" class="form-control" name="zip" ngModel required id="inputZip" placeholder="Postanski broj">
+      </div>
+    </div>
+    
+    <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Naruci</button>
+  </form>
 </div>
