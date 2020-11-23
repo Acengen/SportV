@@ -11,9 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ShopCartItemComponent implements OnInit {
   @Input() prodAndUser:ProductAndUser[];
+  currentUser:any;
+  counter:number;
   constructor(private service:ProductService,private router:Router) { }
   
   ngOnInit() {
+    this.currentUser = this.service.currentUser;
+    this.service.currentUserEmitter.subscribe(user => this.currentUser = user);
   }
 
 
@@ -26,7 +30,7 @@ export class ShopCartItemComponent implements OnInit {
         }
       },
       error => console.log(error)
-      );
+      ); 
   }
 
 }

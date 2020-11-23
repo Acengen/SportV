@@ -82,10 +82,13 @@ namespace SvAPI.Controllers
 
              var user = _mapper.Map<UserDetailDto>(userFromRepo);
 
+             var productsBuyUser = _context.ProductAndUsers.Where(p => p.UId == user.Id);
+
              return Ok( new 
              {
                  token = tokenHandler.WriteToken(token),
-                 user
+                 user,
+                 productsBuyUser
              });
         }
     }

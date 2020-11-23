@@ -24,6 +24,6 @@
         <li role="menuitem editprofile"><a class="dropdown-item" [routerLink]="['/user', currentUser.id]" [queryParams]="{name: currentUser.username}">Edit Profile</a></li>
       </ul>
     </div>
-    <i *ngIf="currentUser;else null" class="fa fa-shopping-cart" [routerLink]="['/yourcart',currentUser.id]" routerLinkActive="router-link-active" ></i>
+    <i *ngIf="currentUser;else null" style="color: black;" class="fa fa-shopping-cart" [routerLink]="['/yourcart',currentUser.id]" ><span>{{counter}}</span></i>
   </div>
 </nav>

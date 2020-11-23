@@ -3,9 +3,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Product } from '../Interfaces/Product';
 import { User } from '../Interfaces/User';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ProductAndUser } from '../Interfaces/ProductAndUser';
 import { Order } from '../Interfaces/Order';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class ProductService {
   currentUser: User;
   counter: number;
 
+  counterEmitter = new EventEmitter<number>();
   currentUserEmitter = new EventEmitter<User>();
 
   constructor(private http: HttpClient) {}
@@ -35,9 +37,10 @@ export class ProductService {
 
   Login(value: any) {
     return this.http.post('http://localhost:5000/api/auth/login', value).pipe(
-      map((resdata: any) => {
+      tap((resdata: any) => {
         localStorage.setItem('token', resdata.token);
         localStorage.setItem('user', JSON.stringify(resdata.user));
+        localStorage.setItem('prod', JSON.stringify(resdata.productsBuyUser));
         this.currentUser = resdata.user;
         this.currentUserEmitter.emit(this.currentUser);
         this.decodedToken = this.jwtHelper.decodeToken(resdata.token);
@@ -54,6 +57,7 @@ export class ProductService {
     this.currentUser = null;
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('prod');
     this.currentUserEmitter.emit(this.currentUser);
   }
 
@@ -72,7 +76,10 @@ export class ProductService {
     return this.http.post<ProductAndUser[]>(
       'http://localhost:5000/api/user/product/' + productId + '/user/' + userId,
       {}
-    );
+    ).pipe(tap((res)=> {
+      this.counter++;
+      this.counterEmitter.emit(this.counter);
+    }));
   }
 
   GetProductsByUser(uId: number) {
@@ -84,7 +91,10 @@ export class ProductService {
   RemoveProductAndUser(id: number) {
     return this.http.delete(
       'http://localhost:5000/api/user/productAndUser/' + id
-    );
+    ).pipe(tap((res)=> {
+      this.counter--;
+      this.counterEmitter.emit(this.counter);
+    }));
   }
   OrderProductsByPrice() {
     return this.http.get<Product[]>(
@@ -102,6 +112,15 @@ export class ProductService {
   }
 
   RemoveAllBuyFromSingleUser(id:number) {
-    return this.http.delete("http://localhost:5000/api/user/removeAllProductFromUser/user/" + id);
+    return this.http.delete("http://localhost:5000/api/user/removeAllProductFromUser/user/" + id).pipe(tap((res)=> {
+      this.counter = 0;
+      this.counterEmitter.emit(this.counter);
+    }));
   }
+
+  CountProductsFromUser(id:number) {
+  return this.http.get("http://localhost:5000/api/user/product/user/" + id);
+  }
+
+ 
 }

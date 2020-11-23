@@ -111,6 +111,16 @@ namespace SvAPI.Controllers
                    sum
                });
           }
+
+          [HttpGet("product/user/{id}")]
+          public async Task<IActionResult> PostToCart(int id, int uid){
+              var currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+              var product =  _context.ProductAndUsers.Where(p => p.UId == currentUser.Id).Count();
+
+              
+             return Ok(product);  
+
+          }
     }
 
   

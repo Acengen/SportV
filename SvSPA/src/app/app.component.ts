@@ -9,19 +9,13 @@ import { User } from './Interfaces/User';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
- 
   jwtHelper = new JwtHelperService();
-  token:any;
-  
- 
   constructor(private service:ProductService) {}
 
   ngOnInit() {
     
     const token = localStorage.getItem('token');
-    const counter = 0;
     const user:User = JSON.parse(localStorage.getItem('user'));
-
     if(token) {
       this.service.decodedToken = this.jwtHelper.decodeToken(token);
     }
@@ -30,6 +24,6 @@ export class AppComponent implements OnInit {
       this.service.currentUser = user;
     }
     
-   
+    
   }
 }
