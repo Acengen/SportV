@@ -12,13 +12,16 @@ import { subscribeOn } from 'rxjs/operators';
 export class NavbarComponent implements OnInit {
   currentUser:User;
   counter:number;
+  isAdded:boolean;
+  isRemoved:boolean;
   
   constructor(private service:ProductService,private router: Router) { }
 
   ngOnInit() {
     this.currentUser = this.service.currentUser;
     this.service.currentUserEmitter.subscribe((current:User) => this.currentUser = current);
-
+    this.service.isAddEmitter.subscribe((isadd:boolean)=> this.isAdded = isadd);
+    this.service.isRemoverEmitter.subscribe((isremoved:boolean)=> this.isRemoved = isremoved);
     this.service.CountProductsFromUser(this.currentUser.id).subscribe((count:number) => {this.counter = count; this.service.counter = this.counter});
     this.service.counterEmitter.subscribe(count => this.counter = count);
   }
@@ -26,6 +29,18 @@ export class NavbarComponent implements OnInit {
 
   loggedIn() {
     return this.service.loggedIn();
+  }
+
+  setClasses() {
+    let classes;
+    if(this.isAdded){
+      classes = 'added';
+    }
+    if(this.isRemoved){
+      classes = 'removed';
+    }
+
+    return classes;
   }
 
   Logout() {

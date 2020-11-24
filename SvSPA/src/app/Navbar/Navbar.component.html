@@ -10,9 +10,7 @@
       <li class="nav-item" *ngIf="!currentUser">
         <a class="nav-link" [routerLink]="['products/register']" >Registruj se | Prijavi se</a>
       </li>
-      
     </ul>
-    
     <div *ngIf="loggedIn()" class="btn-group dropdownlogged" dropdown>
       <button id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle"
               aria-controls="dropdown-basic">
@@ -24,6 +22,6 @@
         <li role="menuitem editprofile"><a class="dropdown-item" [routerLink]="['/user', currentUser.id]" [queryParams]="{name: currentUser.username}">Edit Profile</a></li>
       </ul>
     </div>
-    <i *ngIf="currentUser;else null" style="color: black;" class="fa fa-shopping-cart" [routerLink]="['/yourcart',currentUser.id]" ><span>{{counter}}</span></i>
+    <i *ngIf="currentUser;else null" [ngClass]="setClasses()"  class="fa fa-shopping-bag" [routerLink]="['/yourcart',currentUser.id]" ><span>{{counter}}</span></i>
   </div>
-</nav>
+</nav> 

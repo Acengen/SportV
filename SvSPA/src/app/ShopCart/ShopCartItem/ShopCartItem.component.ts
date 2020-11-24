@@ -1,4 +1,3 @@
-import { Subscription } from 'rxjs';
 import { ProductService } from './../../Services/Product.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductAndUser } from 'src/app/Interfaces/ProductAndUser';
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 export class ShopCartItemComponent implements OnInit {
   @Input() prodAndUser:ProductAndUser[];
   currentUser:any;
-  counter:number;
+  isRemoved:boolean = false;
   constructor(private service:ProductService,private router:Router) { }
   
   ngOnInit() {
@@ -28,6 +27,8 @@ export class ShopCartItemComponent implements OnInit {
         if(this.prodAndUser.length < 1){
             this.router.navigate(["/products"])
         }
+        
+        setTimeout(()=>{this.service.isRemoverEmitter.emit(this.isRemoved);},500)
       },
       error => console.log(error)
       ); 

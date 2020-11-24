@@ -17,9 +17,9 @@ export class ProductDetailComponent implements OnInit {
   id:number;
   images = [];
   sizes = [];
-  isclicked = false;
   sizeAdd = '';
   isAddedInCart:boolean;
+  isadded:boolean = false;
   currentUser:User;
   messageIfUserDont:string;
   constructor(private route:ActivatedRoute,private service:ProductService) { }
@@ -69,7 +69,9 @@ export class ProductDetailComponent implements OnInit {
     }
     this.service.AddToShopCart(this.id,this.user.id).subscribe(
     (resdata:any) => {this.isAddedInCart = true; setTimeout(()=>{this.isAddedInCart=false},2000)},
-    error => console.log(error));
+    error => console.log(error),
+    () => setTimeout(() => {this.service.isAddEmitter.emit(this.isadded)},1000)
+    );
   }
 
   removeSizeSelected() {

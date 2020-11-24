@@ -19,7 +19,6 @@ export class ShopCartComponent implements OnInit {
   discount:number;
   oldPrice:number;
   currentUser:User;
-  counter:number;
   day = new Date().toLocaleString();
   isBuy:boolean;
   constructor(private service:ProductService,private route:ActivatedRoute, private router:Router) { }

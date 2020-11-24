@@ -1,6 +1,6 @@
 .fa {
     font-size: 30px;
-    color: white;
+    color: black;
     position: relative;
 
     span {
@@ -10,6 +10,15 @@
         
     }
 }
+
+.added {
+    color: grey;
+}
+.removed {
+    color: crimson;
+    transform: scale(1.1);
+}
+
 
 .dropdownlogged {
     margin-right: 10px;

@@ -3,10 +3,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Product } from '../Interfaces/Product';
 import { User } from '../Interfaces/User';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ProductAndUser } from '../Interfaces/ProductAndUser';
 import { Order } from '../Interfaces/Order';
-import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +16,11 @@ export class ProductService {
   decodedToken: any;
   currentUser: User;
   counter: number;
+  isAdded:boolean;
+  isRemoved;
 
+  isAddEmitter = new EventEmitter<boolean>();
+  isRemoverEmitter = new EventEmitter<boolean>();
   counterEmitter = new EventEmitter<number>();
   currentUserEmitter = new EventEmitter<User>();
 
@@ -77,6 +80,8 @@ export class ProductService {
       'http://localhost:5000/api/user/product/' + productId + '/user/' + userId,
       {}
     ).pipe(tap((res)=> {
+      this.isAdded = true;
+      this.isAddEmitter.emit(this.isAdded);
       this.counter++;
       this.counterEmitter.emit(this.counter);
     }));
@@ -92,6 +97,8 @@ export class ProductService {
     return this.http.delete(
       'http://localhost:5000/api/user/productAndUser/' + id
     ).pipe(tap((res)=> {
+      this.isRemoved = true;
+      this.isRemoverEmitter.emit(this.isRemoved);
       this.counter--;
       this.counterEmitter.emit(this.counter);
     }));

@@ -53,9 +53,9 @@ export class RegistrationFormComponent implements OnInit {
 
   Login() {
     this.service.Login(this.loginForm.value).subscribe(
-      resdata => this.router.navigate(["/products"]),
+      resdata => {this.router.navigate(["/products"]), location.reload()},
       error => console.log(error),
-      () => location.reload()
+      
     )
   }
 
