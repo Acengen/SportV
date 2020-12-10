@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Product } from '../Interfaces/Product';
@@ -6,6 +6,8 @@ import { User } from '../Interfaces/User';
 import { tap } from 'rxjs/operators';
 import { ProductAndUser } from '../Interfaces/ProductAndUser';
 import { Order } from '../Interfaces/Order';
+import { Observable } from 'rxjs';
+import { Favorite } from '../Interfaces/Favorite';
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +20,22 @@ export class ProductService {
   counter: number;
   isAdded:boolean;
   isRemoved;
+  isFav:boolean;
 
   isAddEmitter = new EventEmitter<boolean>();
   isRemoverEmitter = new EventEmitter<boolean>();
   counterEmitter = new EventEmitter<number>();
   currentUserEmitter = new EventEmitter<User>();
+  isFavEmitter = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient) {}
 
-  GetProducts() {
-    return this.http.get<Product>(this.baseURL);
+  GetProducts(productParam?) {
+     let params = new HttpParams();
+    if(productParam != null){
+      params = params.append('productName', productParam.productName);
+    }
+    return this.http.get<Product[]>(this.baseURL, {params:params});
   }
 
   GetProductById(id: number) {
@@ -103,17 +111,7 @@ export class ProductService {
       this.counterEmitter.emit(this.counter);
     }));
   }
-  OrderProductsByPrice() {
-    return this.http.get<Product[]>(
-      'http://localhost:5000/product/productsByprice'
-    );
-  }
-  OrderProductsByName() {
-    return this.http.get<Product[]>(
-      'http://localhost:5000/product/productsByName'
-    );
-  }
-
+ 
   Getbill(id:number){
     return this.http.get<Order[]>("http://localhost:5000/api/user/productBuy/" + id);
   }
@@ -129,5 +127,16 @@ export class ProductService {
   return this.http.get("http://localhost:5000/api/user/product/user/" + id);
   }
 
+  AddProductToFavorit(prodId:number,userId:number){
+    return this.http.post<Favorite>("http://localhost:5000/api/user/" + userId + "/fav/" + prodId,{})
+  }
+
+  GetFavorite(userId:number){
+    return this.http.get<Favorite[]>("http://localhost:5000/api/user/fav/" + userId);
+  }
+
+  RemoveFavorite(favId:number){
+   return this.http.delete("http://localhost:5000/api/user/favorit/" + favId);
+  }
  
 }

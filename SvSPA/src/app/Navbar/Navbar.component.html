@@ -23,5 +23,6 @@
       </ul>
     </div>
     <i *ngIf="currentUser;else null" [ngClass]="setClasses()"  class="fa fa-shopping-bag" [routerLink]="['/yourcart',currentUser.id]" ><span>{{counter}}</span></i>
+    <i class="fa fa-heart-o"></i>
   </div>
 </nav> 

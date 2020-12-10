@@ -1,3 +1,4 @@
+import { Favorite } from './../../Interfaces/Favorite';
 import { ProductService } from './../../Services/Product.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -13,6 +14,7 @@ import { User } from 'src/app/Interfaces/User';
 export class ProductDetailComponent implements OnInit {
 
   product:Product;
+  favorit:Favorite[] = [];
   user:User;
   id:number;
   images = [];
@@ -22,11 +24,14 @@ export class ProductDetailComponent implements OnInit {
   isadded:boolean = false;
   currentUser:User;
   messageIfUserDont:string;
+  isFav:boolean;
+  addToFav:boolean;
   constructor(private route:ActivatedRoute,private service:ProductService) { }
 
   ngOnInit() {
     this.user = this.service.currentUser;
     this.currentUser = this.service.currentUser;
+    this.service.isFavEmitter.subscribe(isfav => this.isFav = isfav);
     this.route.params.subscribe(
       (param:Params) => {
         this.id = +param['id'];
@@ -40,7 +45,21 @@ export class ProductDetailComponent implements OnInit {
           this.product = resdata;
         })
       }
-    )
+    );
+
+    this.service.GetFavorite(this.user.id).subscribe(
+      (resdata:Favorite[]) => {
+        let filtere =  resdata.filter(v => {
+        return v.pId === this.id;
+        });
+        if(filtere.length > 0){
+          this.isFav = true;
+          this.favorit = resdata;
+        }
+      }
+    );
+
+   
    
   }
 
@@ -79,6 +98,29 @@ export class ProductDetailComponent implements OnInit {
     for(let key in this.sizes){
         this.sizes[key].isClicked = false;
     }
+  }
+
+  AddToFavorite() {
+      if(!this.isFav){
+        this.service.AddProductToFavorit(this.id, this.user.id).subscribe(
+          resdata => {
+            if(resdata.isFav){
+                this.isFav = true;
+                this.addToFav = true;
+                setTimeout(()=>{this.addToFav=false},1000)
+                this.service.isFavEmitter.emit(this.isFav); 
+            }
+          }
+        );
+      }
+
+      if(this.isFav){
+         this.service.RemoveFavorite(this.product.id).subscribe(resdata => {
+           this.isFav = false;
+           this.service.isFavEmitter.emit(this.isFav);
+         })
+      }
+    
   }
  
 }

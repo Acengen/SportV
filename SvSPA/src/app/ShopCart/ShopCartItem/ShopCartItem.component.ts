@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ShopCartItemComponent implements OnInit {
   @Input() prodAndUser:ProductAndUser[];
   currentUser:any;
-  isRemoved:boolean = false;
+  isRemoved:boolean;
   constructor(private service:ProductService,private router:Router) { }
   
   ngOnInit() {
@@ -28,7 +28,10 @@ export class ShopCartItemComponent implements OnInit {
             this.router.navigate(["/products"])
         }
         
-        setTimeout(()=>{this.service.isRemoverEmitter.emit(this.isRemoved);},500)
+        setTimeout(()=>{
+          this.isRemoved = false;
+          this.service.isRemoverEmitter.emit(this.isRemoved);
+        },500)
       },
       error => console.log(error)
       ); 

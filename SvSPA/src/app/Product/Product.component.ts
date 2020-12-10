@@ -10,39 +10,38 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./Product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  product:Product[] = [];
+  product:Product[];
   ordered:boolean = false;
   productSb:Subscription;
+  productParam:any = {};
+  for:NgForm;
+  productValue:any = [{name: "Puma"},{name:"Nike"},{name:"Adidas"}]
   constructor(private service:ProductService) { }
 
   ngOnInit() {
+     this.loadProducts();
+  }
+
+  loadProducts() {
     this.service.GetProducts().subscribe(
       responseData => {
-        for(let key in responseData){
-          this.product.push(responseData[key]);
-        }
+       
+          this.product = responseData;
+          this.productParam.productName = "Nike"
       }
     );
   }
-
-  OrderByPrice() {
-    this.service.OrderProductsByPrice().subscribe((resdata:Product[])=>{
-      this.product = resdata;
-    })
+  LoadProductName() {
+    this.service.GetProducts(this.productParam).subscribe(
+      (responseData:Product[]) => {
+          this.product = responseData;
+         
+      }
+    )
   }
 
-  OrderByName() {
-    this.service.OrderProductsByName().subscribe((resdata:Product[])=>{
-      this.product = resdata;
-    })
-  }
 
-  Submit(f:NgForm) {
-    if(f.value.select === "2"){
-      this.OrderByPrice();
-    }
-    if(f.value.select === "3"){
-      this.OrderByName();
-    }
-  }
+ 
+
+ 
 }

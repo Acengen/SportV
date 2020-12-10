@@ -1,7 +1,7 @@
 .porddetail {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding:10px 20px;
 }
 carousel {
     img {
@@ -65,4 +65,9 @@ carousel {
     text-align: center;
     margin-top: 5px;
     border-radius: 3px;
+}
+
+.fa-star-o {
+    margin-left: 50px;
+    margin-top: 10px;
 }

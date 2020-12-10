@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './404NotFound/404NotFound/404NotFound.component';
 import { RegisterGuardGuard } from './register-guard.guard';
 import { CartGuard } from './cart.guard';
 import { UserComponent } from './User/User.component';
@@ -10,11 +11,13 @@ import { ShopCartComponent } from './ShopCart/ShopCart.component';
 export const routes: Routes = [
   { path:"", redirectTo:"/products", pathMatch:"full" },
   {path: "products", component:ProductComponent, children:[
-    {path: "register" , component: RegistrationFormComponent, canActivate:[RegisterGuardGuard]},
+    {path: "register" , component: RegistrationFormComponent, canActivate:[RegisterGuardGuard]}
   ]},
   {path: "products/:id", component:ProductDetailComponent},
   {path: "user/:id", component: UserComponent},
-  {path: "yourcart/:id", component: ShopCartComponent, canActivate:[CartGuard]}
+  {path: "yourcart/:id", component: ShopCartComponent, canActivate:[CartGuard]},
+  {path:'not-found', component:NotFoundComponent},
+  {path:'**', redirectTo:'/not-found'}
 ];
 
 export const ApprouteRoutes = RouterModule.forChild(routes);

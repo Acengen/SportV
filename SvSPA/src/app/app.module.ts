@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './404NotFound/404NotFound/404NotFound.component';
 import { CartGuard } from './cart.guard';
 import { ShopCartItemComponent } from './ShopCart/ShopCartItem/ShopCartItem.component';
 import { routes } from './Approute.routing';
@@ -29,11 +30,12 @@ export function tokenGetter() {
     ProductComponent,
     ProductItemComponent,
     ProductDetailComponent,
-      NavbarComponent,
-      RegistrationFormComponent,
-      UserComponent,
-      ShopCartComponent,
-      ShopCartItemComponent
+    NavbarComponent,
+    RegistrationFormComponent,
+    UserComponent,
+    ShopCartComponent,
+    ShopCartItemComponent,
+    NotFoundComponent,
    ],
   imports: [
     BrowserModule,

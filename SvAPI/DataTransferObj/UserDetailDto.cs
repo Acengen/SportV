@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using SvAPI.Models;
+
 namespace SvAPI.DataTransferObj
 {
     public class UserDetailDto
@@ -8,5 +11,7 @@ namespace SvAPI.DataTransferObj
         public string About { get; set; }
         public string NickName { get; set; }
         public string Email { get; set; }
+
+
     }
 }

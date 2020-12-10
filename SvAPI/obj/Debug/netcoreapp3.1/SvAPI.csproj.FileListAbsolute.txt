@@ -66,3 +66,11 @@ C:\Users\38160\Desktop\SportVisionApp\SvAPI\obj\Debug\netcoreapp3.1\SvAPI.genrun
 C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Schema.dll
 C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Serialize.Linq.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.NodeServices.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SpaServices.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Configuration.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Console.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\38160\Desktop\SportVisionApp\SvAPI\obj\Debug\netcoreapp3.1\SvAPI.MvcApplicationPartsAssemblyInfo.cs

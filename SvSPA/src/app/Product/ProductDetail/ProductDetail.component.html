@@ -1,3 +1,4 @@
+<i class="fa fa-star-o" style="font-size:36px" [ngStyle]="{'color': isFav ? 'red' : 'black'}" (click)="AddToFavorite()"></i><span class="text-success" *ngIf="addToFav"><i class="fa fa-check-circle-o"></i> add to favorite</span>
 <div class="porddetail">
   <carousel class="col-md-5" [isAnimated]="true">
     <slide *ngFor="let img of images">

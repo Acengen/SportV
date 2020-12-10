@@ -15,6 +15,7 @@ export class RegistrationFormComponent implements OnInit {
   loginForm:FormGroup;
   user:User;
   isRegistered:boolean;
+  errorMsg:string;
   constructor(private service:ProductService,private router: Router) { }
 
   ngOnInit() {
@@ -54,7 +55,11 @@ export class RegistrationFormComponent implements OnInit {
   Login() {
     this.service.Login(this.loginForm.value).subscribe(
       resdata => {this.router.navigate(["/products"]), location.reload()},
-      error => console.log(error),
+      error => {
+        if(error){
+          this.errorMsg = "User doesn't exist"
+        }
+      }
       
     )
   }

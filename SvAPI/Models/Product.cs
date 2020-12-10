@@ -16,7 +16,6 @@ namespace SvAPI.Models
         public string Usage { get; set; }
         public ICollection<Size> Sizes { get; set; }
 
-        public ICollection<ProductImage> ProductImages { get; set; }
-
+        public ICollection<ProductImage> ProductImages { get; set; }  
     }
 }

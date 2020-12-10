@@ -25,13 +25,12 @@
     </slide>
   </carousel>
 </div>
-<form #f="ngForm" class="p-3" (ngSubmit)="Submit(f)">
-  <select class="p-1" name="select" id="" ngModel>
-    <option value="">--- Order By ---</option>
-    <option value="2" (click)="OrderByPrice()">Order By Price</option>
-    <option value="3">Order By Name</option>
+<form #form="ngForm" class="p-3" (ngSubmit)="LoadProductName()">
+  <select class="p-1" name="s" [(ngModel)]="productParam.productName">
+    <option *ngFor="let prodV of productValue" [value]="prodV.name">{{prodV.name}}</option>
   </select>
-  <button class="btn btn-dark m-3" type="submit">Next</button>
+    <button class="btn btn-dark" type="submit" [disabled]="!form.valid">Order</button>
+    
 </form>
 <div class="products">
   <div *ngFor="let prod of product">
