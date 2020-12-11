@@ -30,7 +30,15 @@ namespace SvAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureDevelopmentServices(IServiceCollection services){
+            services.AddDbContext<SvDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            ConfigureServices(services);
+        }
+        public void ConfigureProductionServices(IServiceCollection services){
+            services.AddDbContext<SvDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            ConfigureServices(services);
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Product).Assembly);
@@ -40,7 +48,7 @@ namespace SvAPI
             services.AddScoped<IProduct,ProductRepo>();
             services.AddScoped<IFav,FavRepo>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddMvcOptions(op => op.EnableEndpointRouting = false);
-            services.AddDbContext<SvDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<SvDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
