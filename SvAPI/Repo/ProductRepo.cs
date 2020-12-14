@@ -24,6 +24,14 @@ namespace SvAPI.Repo
                 var prodFilter = _context.Products.Where(p => p.Name == productParam.ProductName);
                 return prodFilter;
             }
+            if(!productParam.PriceHigh){
+                var prodprice = _context.Products.OrderBy(p => p.Price);
+                return prodprice;
+            }
+             if(productParam.PriceHigh){
+                var prodprice = _context.Products.OrderBy(p => p.Price).Reverse();
+                return prodprice;
+            }
 
             return products;
         }

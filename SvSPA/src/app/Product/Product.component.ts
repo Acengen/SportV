@@ -14,8 +14,9 @@ export class ProductComponent implements OnInit {
   ordered:boolean = false;
   productSb:Subscription;
   productParam:any = {};
-  for:NgForm;
-  productValue:any = [{name: "Puma"},{name:"Nike"},{name:"Adidas"}]
+  productPriceParam:any = {};
+  productValue:any = [{name: "Puma"},{name:"Nike"},{name:"Adidas"}];
+  productPrice:any = [{name:"Low", is:false},{name:"High", is:true}];
 
   constructor(private service:ProductService) { }
 
@@ -29,7 +30,8 @@ export class ProductComponent implements OnInit {
       responseData => {
        
           this.product = responseData;
-          this.productParam.productName = "Nike"
+          this.productParam.productName = "Nike";
+          this.productPriceParam.priceHigh = true;
       }
     );
   }
@@ -42,7 +44,13 @@ export class ProductComponent implements OnInit {
     )
   }
 
-
+  LoadProductByPrice() {
+      this.service.GetProductsByPrice(this.productPriceParam).subscribe(
+        (responseData:Product[]) => {
+            this.product = responseData;
+        }
+      )
+  }
  
 
  

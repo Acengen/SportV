@@ -50,24 +50,22 @@ namespace SvAPI.Controllers
             return Ok(productToReturn);
         }
 
-        [HttpGet("productsByprice")]
-        public async Task<IActionResult> OrderProductByPrice()
-        {
-            var product = await _context.Products.Include(p => p.ProductImages).OrderBy(p => p.Price).ToListAsync();
+        // [HttpGet("productsByprice")]
+        // public async Task<IActionResult> OrderProductByPrice()
+        // {
+            
 
-            var productToReturn = _mapper.Map<IEnumerable<ProductDto>>(product);
+        //     return Ok();
+        // }
+        // [HttpGet("productsByName")]
+        // public async Task<IActionResult> OrderProductByName()
+        // {
+        //     var product = await _context.Products.Include(p => p.ProductImages).OrderBy(p => p.Name).ToListAsync();
 
-            return Ok(productToReturn);
-        }
-        [HttpGet("productsByName")]
-        public async Task<IActionResult> OrderProductByName()
-        {
-            var product = await _context.Products.Include(p => p.ProductImages).OrderBy(p => p.Name).ToListAsync();
+        //     var productToReturn = _mapper.Map<IEnumerable<ProductDto>>(product);
 
-            var productToReturn = _mapper.Map<IEnumerable<ProductDto>>(product);
-
-            return Ok(productToReturn);
-        }
+        //     return Ok(productToReturn);
+        // }
 
     }
 }

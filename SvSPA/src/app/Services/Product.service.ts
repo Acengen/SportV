@@ -37,6 +37,14 @@ export class ProductService {
     }
     return this.http.get<Product[]>(this.baseURL, {params:params});
   }
+  GetProductsByPrice(priceHigh?) {
+    let params = new HttpParams();
+   if(priceHigh != null){
+     params = params.append('priceHigh', priceHigh.priceHigh);
+   }
+    
+   return this.http.get<Product[]>(this.baseURL, {params:params});
+ }
 
   GetProductById(id: number) {
     return this.http.get<Product>(this.baseURL + id);
