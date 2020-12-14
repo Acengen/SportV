@@ -30,7 +30,6 @@
     <option *ngFor="let prodV of productValue" [value]="prodV.name">{{prodV.name}}</option>
   </select>
     <button class="btn btn-dark" type="submit" [disabled]="!form.valid">Order</button>
-    
 </form>
 <div class="products">
   <div *ngFor="let prod of product">

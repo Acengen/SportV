@@ -45,7 +45,6 @@ namespace SvAPI.Controllers
 
             await _context.Sizes.Where(s => s.ProductId == product.Id).ToListAsync();
 
-
             var productToReturn = _mapper.Map<ProductDetailDto>(product);
 
             return Ok(productToReturn);

@@ -12,6 +12,7 @@ export class ShopCartItemComponent implements OnInit {
   @Input() prodAndUser:ProductAndUser[];
   currentUser:any;
   isRemoved:boolean;
+  isToggle:boolean = false;
   constructor(private service:ProductService,private router:Router) { }
   
   ngOnInit() {
@@ -35,6 +36,24 @@ export class ShopCartItemComponent implements OnInit {
       },
       error => console.log(error)
       ); 
+  }
+
+  OnClick(prod:ProductAndUser) {
+    prod.toggle = !prod.toggle;
+    this.setClass(prod);
+  }
+
+  setClass(prod:ProductAndUser){
+    let classes = '';
+    
+    if(!prod.toggle){
+      return null;
+    }
+    if(prod.toggle){
+      classes = 'activated'
+    }
+
+    return classes
   }
 
 }

@@ -12,8 +12,7 @@
   </div>
   <div class="user-edit" *ngIf="edit">
     <p class="text-muted">USER EDIT</p>
-      <form [formGroup]="saveEdit" (ngSubmit)="SaveChanges()">
-        
+      <form [formGroup]="saveEdit" (ngSubmit)="SaveChanges()"> 
         <div class="form-group">
           <label>ABOUT:
               <textarea placeholder="write something about your self..." cols="30" rows="6" class="form-control" formControlName="about"></textarea>

@@ -16,10 +16,12 @@ export class ProductComponent implements OnInit {
   productParam:any = {};
   for:NgForm;
   productValue:any = [{name: "Puma"},{name:"Nike"},{name:"Adidas"}]
+
   constructor(private service:ProductService) { }
 
   ngOnInit() {
      this.loadProducts();
+   
   }
 
   loadProducts() {

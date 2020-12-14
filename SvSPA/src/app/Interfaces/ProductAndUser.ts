@@ -6,5 +6,5 @@ export interface ProductAndUser {
     productPrice:number,
     productDescription: string,
     productGender:string,
-   
+    toggle?:boolean;
 }

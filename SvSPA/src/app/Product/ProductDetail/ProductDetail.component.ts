@@ -1,7 +1,7 @@
 import { Favorite } from './../../Interfaces/Favorite';
 import { ProductService } from './../../Services/Product.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Data, Params } from '@angular/router';
 import { Product } from 'src/app/Interfaces/Product';
 import { User } from 'src/app/Interfaces/User';
 
@@ -32,20 +32,19 @@ export class ProductDetailComponent implements OnInit {
     this.user = this.service.currentUser;
     this.currentUser = this.service.currentUser;
     this.service.isFavEmitter.subscribe(isfav => this.isFav = isfav);
-    this.route.params.subscribe(
-      (param:Params) => {
-        this.id = +param['id'];
-        this.service.GetProductById(this.id).subscribe(resdata => {
-          for(let key in resdata.productImages) {
-            this.images.push(resdata.productImages[key].image);
-          }
-          for(let key in resdata.sizes) {
-            this.sizes.push(resdata.sizes[key]);
-          }
-          this.product = resdata;
-        })
-      }
-    );
+
+    this.route.data.subscribe((data: Data) => {
+      this.product = data['product'];
+      this.service.GetProductById(this.product.id).subscribe((resdata) => {
+        for (let key in resdata.productImages) {
+          this.images.push(resdata.productImages[key].image);
+        }
+        for (let key in resdata.sizes) {
+          this.sizes.push(resdata.sizes[key]);
+        }
+        this.product = resdata;
+      });
+    });
 
     this.service.GetFavorite(this.user.id).subscribe(
       (resdata:Favorite[]) => {
@@ -59,7 +58,7 @@ export class ProductDetailComponent implements OnInit {
       }
     );
 
-   
+   this.route.queryParams.subscribe((q:Params)=> console.log(q))
    
   }
 
@@ -86,7 +85,7 @@ export class ProductDetailComponent implements OnInit {
     if(this.currentUser == null) {
       this.messageIfUserDont = "Login/register";
     }
-    this.service.AddToShopCart(this.id,this.user.id).subscribe(
+    this.service.AddToShopCart(this.product.id,this.user.id).subscribe(
     (resdata:any) => {this.isAddedInCart = true; setTimeout(()=>{this.isAddedInCart=false},2000)},
     error => console.log(error),
     () => setTimeout(() => {this.service.isAddEmitter.emit(this.isadded)},1000)
@@ -102,7 +101,7 @@ export class ProductDetailComponent implements OnInit {
 
   AddToFavorite() {
       if(!this.isFav){
-        this.service.AddProductToFavorit(this.id, this.user.id).subscribe(
+        this.service.AddProductToFavorit(this.product.id, this.user.id).subscribe(
           resdata => {
             if(resdata.isFav){
                 this.isFav = true;

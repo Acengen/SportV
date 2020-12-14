@@ -1,4 +1,4 @@
-<div *ngFor="let prodAndUser of prodAndUser;let i = index;" class="card mb-3" style="border-top: 0px;">
+<div *ngFor="let prodAndUser of prodAndUser;let i = index;" class="card mb-3" style="border-top: 0px;" (click)="OnClick(prodAndUser)" [ngClass]="setClass(prodAndUser)">
   <div class="row no-gutters">
     <div class="col-md-4">
       <h2>{{prodAndUser.productName}}</h2>
