@@ -6,8 +6,11 @@ import { User } from '../Interfaces/User';
 import { tap } from 'rxjs/operators';
 import { ProductAndUser } from '../Interfaces/ProductAndUser';
 import { Order } from '../Interfaces/Order';
-import { Observable } from 'rxjs';
 import { Favorite } from '../Interfaces/Favorite';
+import { Store } from '@ngrx/store';
+
+import * as fromReducer from '../RegistrationForm/login.reducer';
+import * as fromActions from '../RegistrationForm/login.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +31,7 @@ export class ProductService {
   currentUserEmitter = new EventEmitter<User>();
   isFavEmitter = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private store:Store<fromReducer.AppState>) {}
 
   GetProducts(productParam?) {
      let params = new HttpParams();
@@ -55,16 +58,16 @@ export class ProductService {
   }
 
   Login(value: any) {
-    return this.http.post('http://localhost:5000/api/auth/login', value).pipe(
-      tap((resdata: any) => {
-        localStorage.setItem('token', resdata.token);
-        localStorage.setItem('user', JSON.stringify(resdata.user));
-        localStorage.setItem('prod', JSON.stringify(resdata.productsBuyUser));
-        this.currentUser = resdata.user;
-        this.currentUserEmitter.emit(this.currentUser);
-        this.decodedToken = this.jwtHelper.decodeToken(resdata.token);
-      })
-    );
+    
+    // return this.http.post('http://localhost:5000/api/auth/login', value).pipe(
+    //   tap((resdata: any) => {
+    //     localStorage.setItem('token', resdata.token);
+    //     localStorage.setItem('user', JSON.stringify(resdata.user));
+    //     this.currentUser = resdata.user;
+    //     this.currentUserEmitter.emit(this.currentUser);
+    //     this.decodedToken = this.jwtHelper.decodeToken(resdata.token);
+    //   })
+    // );
   }
 
   loggedIn() {

@@ -4,6 +4,11 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { User } from '../Interfaces/User';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import * as fromReducer from '../RegistrationForm/login.reducer'
+import * as fromActions from '../RegistrationForm/login.actions'
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-RegistrationForm',
@@ -16,11 +21,14 @@ export class RegistrationFormComponent implements OnInit {
   user:User;
   isRegistered:boolean;
   errorMsg:string;
-  constructor(private service:ProductService,private router: Router) { }
+  constructor(private service:ProductService,private router: Router,private store:Store<fromReducer.AppState>) { }
 
   ngOnInit() {
     this.RegisterformCreating();
     this.LoginFormCreating();
+    this.store.select('userLogin').subscribe(r => {
+      this.errorMsg = r.authError
+    })
   }
 
 
@@ -53,15 +61,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   Login() {
-    this.service.Login(this.loginForm.value).subscribe(
-      resdata => {this.router.navigate(["/products"]), location.reload()},
-      error => {
-        if(error){
-          this.errorMsg = "User doesn't exist"
-        }
-      }
-      
-    )
+    this.store.dispatch(new fromActions.LoginStart(this.loginForm.value));
   }
 
   

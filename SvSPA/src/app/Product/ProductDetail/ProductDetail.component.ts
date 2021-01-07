@@ -4,7 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Params } from '@angular/router';
 import { Product } from 'src/app/Interfaces/Product';
 import { User } from 'src/app/Interfaces/User';
-
+import { Store } from '@ngrx/store';
+import * as fromReducer from '../../RegistrationForm/login.reducer'
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ProductDetail',
@@ -26,11 +28,16 @@ export class ProductDetailComponent implements OnInit {
   messageIfUserDont:string;
   isFav:boolean;
   addToFav:boolean;
-  constructor(private route:ActivatedRoute,private service:ProductService) { }
+  constructor(private route:ActivatedRoute,private service:ProductService,private store:Store<fromReducer.AppState>) { }
 
   ngOnInit() {
-    this.user = this.service.currentUser;
-    this.currentUser = this.service.currentUser;
+    
+    this.store.select('userLogin').pipe(map(resState => resState)).subscribe(res => {
+      if(res) {
+        this.currentUser = res.user;
+        this.user = res.user
+      }
+    })
     this.service.isFavEmitter.subscribe(isfav => this.isFav = isfav);
 
     this.route.data.subscribe((data: Data) => {
@@ -46,17 +53,19 @@ export class ProductDetailComponent implements OnInit {
       });
     });
 
-    this.service.GetFavorite(this.user.id).subscribe(
-      (resdata:Favorite[]) => {
-        let filtere =  resdata.filter(v => {
-        return v.pId === this.id;
-        });
-        if(filtere.length > 0){
-          this.isFav = true;
-          this.favorit = resdata;
+    if(this.currentUser) {
+      this.service.GetFavorite(this.user.id).subscribe(
+        (resdata:Favorite[]) => {
+          let filtere =  resdata.filter(v => {
+          return v.pId === this.id;
+          });
+          if(filtere.length > 0){
+            this.isFav = true;
+            this.favorit = resdata;
+          }
         }
-      }
-    );
+      );
+    }
 
    this.route.queryParams.subscribe((q:Params)=> console.log(q))
    
@@ -82,7 +91,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   AddToCart() {
-    if(this.currentUser == null) {
+    if(!this.currentUser) {
       this.messageIfUserDont = "Login/register";
     }
     this.service.AddToShopCart(this.product.id,this.user.id).subscribe(

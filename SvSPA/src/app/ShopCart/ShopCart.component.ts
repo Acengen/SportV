@@ -34,7 +34,7 @@ export class ShopCartComponent implements OnInit {
       }
     });
 
-    this.currentUser = this.service.currentUser;
+    //this.currentUser = this.service.currentUser;
   }
 
   GetBill() {

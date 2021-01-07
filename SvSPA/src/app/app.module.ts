@@ -19,6 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserComponent } from './User/User.component';
 import { ShopCartComponent } from './ShopCart/ShopCart.component';
+import { StoreModule } from '@ngrx/store';
+import { LoginReducer } from './RegistrationForm/login.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { LoginEffects } from './RegistrationForm/login.effects';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,6 +50,8 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({userLogin:LoginReducer}),
+    EffectsModule.forRoot([LoginEffects]),
     JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,

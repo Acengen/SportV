@@ -2,6 +2,11 @@ import { ProductService } from './Services/Product.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Component, OnInit } from '@angular/core';
 import { User } from './Interfaces/User';
+import { Store } from '@ngrx/store';
+
+import * as fromReducer from './RegistrationForm/login.reducer';
+import * as fromActions from '../app/RegistrationForm/login.actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +16,15 @@ import { User } from './Interfaces/User';
 export class AppComponent implements OnInit {
   jwtHelper = new JwtHelperService();
 
-  constructor(private service:ProductService) {}
+  constructor(private service:ProductService,private store:Store<fromReducer.AppState>) {}
 
   ngOnInit() {
-    
     const token = localStorage.getItem('token');
     const user:User = JSON.parse(localStorage.getItem('user'));
     if(token) {
       this.service.decodedToken = this.jwtHelper.decodeToken(token);
     }
-
+    
     if(user) {
       this.service.currentUser = user;
     }
