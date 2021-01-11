@@ -1,11 +1,30 @@
 .footer {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    background-color: rgb(56, 57, 59);
+    background-color: rgb(30, 30, 31);
     color: white;
-    padding: 20px 0px;
+    padding: 30px;
     margin-top: 50px;
     .address {
         justify-self: center;
+    }
+    .social {
+        i {
+            background-color:  rgb(73, 74, 77);;
+            padding: 10px;
+            margin-right: 5px;
+            margin-top: 10px;
+        }
+    }
+}
+
+@media(max-width: 650px) {
+    .footer {
+        .address {
+            justify-self: left;
+        }
+        .about {
+            margin-top: 20px;
+        }
     }
 }
