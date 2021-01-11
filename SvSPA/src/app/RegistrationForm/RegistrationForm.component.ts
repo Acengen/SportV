@@ -6,7 +6,8 @@ import { User } from '../Interfaces/User';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import * as fromReducer from '../RegistrationForm/login.reducer'
+import * as fromRoot from '../app.reducer'
+import * as fromReducer from './login.reducer'
 import * as fromActions from '../RegistrationForm/login.actions'
 import { map } from 'rxjs/operators';
 
@@ -21,7 +22,7 @@ export class RegistrationFormComponent implements OnInit {
   user:User;
   isRegistered:boolean;
   errorMsg:string;
-  constructor(private service:ProductService,private router: Router,private store:Store<fromReducer.AppState>) { }
+  constructor(private service:ProductService,private router: Router,private store:Store<fromRoot.AppState>) { }
 
   ngOnInit() {
     this.RegisterformCreating();

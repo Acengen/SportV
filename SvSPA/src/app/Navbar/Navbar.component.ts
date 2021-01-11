@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../Interfaces/User';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as fromReducer from '../RegistrationForm/login.reducer'
+import * as fromReducer from '../app.reducer'
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/internal/Subscription';
 

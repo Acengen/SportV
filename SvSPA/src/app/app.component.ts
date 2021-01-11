@@ -4,9 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from './Interfaces/User';
 import { Store } from '@ngrx/store';
 
-import * as fromReducer from './RegistrationForm/login.reducer';
-import * as fromActions from '../app/RegistrationForm/login.actions';
-import { map } from 'rxjs/operators';
+import * as fromReducer from './app.reducer';
 
 @Component({
   selector: 'app-root',

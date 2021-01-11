@@ -5,7 +5,7 @@ import { ActivatedRoute, Data, Params } from '@angular/router';
 import { Product } from 'src/app/Interfaces/Product';
 import { User } from 'src/app/Interfaces/User';
 import { Store } from '@ngrx/store';
-import * as fromReducer from '../../RegistrationForm/login.reducer'
+import * as fromReducer from '../../app.reducer'
 import { map } from 'rxjs/operators';
 
 @Component({

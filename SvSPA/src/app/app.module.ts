@@ -23,13 +23,16 @@ import { StoreModule } from '@ngrx/store';
 import { LoginReducer } from './RegistrationForm/login.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginEffects } from './RegistrationForm/login.effects';
+import { FooterComponent } from './footer/footer.component';
+
+import * as fromRoot from './app.reducer'
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
     ProductComponent,
     ProductItemComponent,
@@ -40,6 +43,7 @@ export function tokenGetter() {
     ShopCartComponent,
     ShopCartItemComponent,
     NotFoundComponent,
+      FooterComponent
    ],
   imports: [
     BrowserModule,
@@ -50,7 +54,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({userLogin:LoginReducer}),
+    StoreModule.forRoot(fromRoot.reducers),
     EffectsModule.forRoot([LoginEffects]),
     JwtModule.forRoot({
         config: {

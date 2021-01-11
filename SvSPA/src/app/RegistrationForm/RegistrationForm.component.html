@@ -36,7 +36,7 @@
           <div class="invalid-feedback" *ngIf="regForm.get('confirmPassword').hasError('required') && regForm.get('confirmPassword').touched">confirmPassword</div>
           <div class="invalid-feedback" *ngIf="regForm.hasError('mismatch') && regForm.get('password').touched">Password must match</div>
         </div>
-        <button class="btn btn-warning" [disabled]="!regForm.valid" type="submit">Register</button><span class="text-light">Already have account <a (click)="isRegistered = !isRegistered">Login</a></span>
+        <button class="btn btn-warning" [disabled]="!regForm.valid" type="submit">Register</button><span class="text-light">Already have account <a (click)="isRegistered = !isRegistered" class="text-light" style="text-decoration: underline;">Login</a></span>
     </form>
     </div>
   </div>

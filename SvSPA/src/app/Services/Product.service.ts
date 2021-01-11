@@ -7,10 +7,7 @@ import { tap } from 'rxjs/operators';
 import { ProductAndUser } from '../Interfaces/ProductAndUser';
 import { Order } from '../Interfaces/Order';
 import { Favorite } from '../Interfaces/Favorite';
-import { Store } from '@ngrx/store';
 
-import * as fromReducer from '../RegistrationForm/login.reducer';
-import * as fromActions from '../RegistrationForm/login.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +28,7 @@ export class ProductService {
   currentUserEmitter = new EventEmitter<User>();
   isFavEmitter = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient,private store:Store<fromReducer.AppState>) {}
+  constructor(private http: HttpClient) {}
 
   GetProducts(productParam?) {
      let params = new HttpParams();
@@ -57,18 +54,7 @@ export class ProductService {
     return this.http.post('http://localhost:5000/api/auth/register', user);
   }
 
-  Login(value: any) {
-    
-    // return this.http.post('http://localhost:5000/api/auth/login', value).pipe(
-    //   tap((resdata: any) => {
-    //     localStorage.setItem('token', resdata.token);
-    //     localStorage.setItem('user', JSON.stringify(resdata.user));
-    //     this.currentUser = resdata.user;
-    //     this.currentUserEmitter.emit(this.currentUser);
-    //     this.decodedToken = this.jwtHelper.decodeToken(resdata.token);
-    //   })
-    // );
-  }
+  
 
   loggedIn() {
     const token = localStorage.getItem('token');

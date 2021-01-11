@@ -1,0 +1,11 @@
+.footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    background-color: rgb(56, 57, 59);
+    color: white;
+    padding: 20px 0px;
+    margin-top: 50px;
+    .address {
+        justify-self: center;
+    }
+}

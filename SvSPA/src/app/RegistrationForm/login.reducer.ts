@@ -8,9 +8,7 @@ export interface State {
     authError:string
 }
 
-export interface AppState {
-    userLogin:State
-}
+
 
 const initialState: State = {
     token:null,
@@ -55,4 +53,6 @@ export function LoginReducer(state=initialState,action:fromActions.LoginTypes) {
             return state;
     }
 }
+
+export const getUser = (state:State) => state.user
 

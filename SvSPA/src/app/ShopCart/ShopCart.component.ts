@@ -5,6 +5,9 @@ import { ProductAndUser } from '../Interfaces/ProductAndUser';
 import { Order } from '../Interfaces/Order';
 import { NgForm } from '@angular/forms';
 import { User } from '../Interfaces/User';
+import { Store } from '@ngrx/store';
+import * as fromReducer from '../app.reducer'
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ShopCart',
@@ -21,7 +24,7 @@ export class ShopCartComponent implements OnInit {
   currentUser:User;
   day = new Date().toLocaleString();
   isBuy:boolean;
-  constructor(private service:ProductService,private route:ActivatedRoute, private router:Router) { }
+  constructor(private service:ProductService,private route:ActivatedRoute, private router:Router,private store:Store<fromReducer.AppState>) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -35,6 +38,9 @@ export class ShopCartComponent implements OnInit {
     });
 
     //this.currentUser = this.service.currentUser;
+    this.store.select('userLogin').pipe(map(state => state.user)).subscribe(
+      user => this.currentUser = user
+    )
   }
 
   GetBill() {

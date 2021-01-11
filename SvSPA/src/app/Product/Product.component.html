@@ -25,18 +25,18 @@
     </slide>
   </carousel>
 </div>
-<div class="forms row justify-content-center m-3">
-  <form #form="ngForm" class="p-3 col-3 row" (ngSubmit)="LoadProductName()">
-    <select class="form-control  col-4" name="s" [(ngModel)]="productParam.productName">
+<div class="forms row m-3">
+  <form #form="ngForm" class="p-3" (ngSubmit)="LoadProductName()">
+    <select class="form-control" name="s" [(ngModel)]="productParam.productName">
       <option *ngFor="let prodV of productValue" [value]="prodV.name">{{prodV.name}}</option>
     </select>
-      <button class="btn btn-sm btn-dark col-md-3 form-control text-center" type="submit" [disabled]="!form.valid">Order</button>
+      <button class="btn btn-sm btn-dark form-control text-center" type="submit" [disabled]="!form.valid">Order</button>
   </form>
-  <form #f="ngForm" class="p-3 col-3 row" (ngSubmit)="LoadProductByPrice()">
-    <select class="form-control col" name="ss" [(ngModel)]="productPriceParam.priceHigh">
+  <form #f="ngForm" class="p-3" (ngSubmit)="LoadProductByPrice()">
+    <select class="form-control" name="ss" [(ngModel)]="productPriceParam.priceHigh">
       <option *ngFor="let v of productPrice" [value]="v.is">{{v.name}}</option>
     </select>
-    <button class="btn btn-sm btn-dark col form-control text-center" type="submit">Order by price</button>
+    <button class="btn btn-sm btn-dark form-control text-center" type="submit">Order by price</button>
   </form>
 </div>
 <div class="products">
